@@ -38,7 +38,7 @@ bot.login(config.token);
 
 bot.on('guildMemberAdd', member => {
     member.createDM().then(channel => {
-        return channel.send('Bienvenue sur le serveur ' + member.displayName + '! Prends une bière, un café et mets toi à l\'aise!')
+        return channel.send('Bienvenue sur le serveur ' + member.displayName + '! Prends une bière, un café et mets toi à l\'aise!\n Tape !help pour connaitre les commandes')
     }).catch(console.error)
     // On pourrait catch l'erreur autrement ici (l'utilisateur a peut être désactivé les MP)
 })
