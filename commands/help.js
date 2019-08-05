@@ -4,6 +4,7 @@ module.exports = {
     execute(message, args, client) {
         message.channel.send(`Hello! Je suis Monsieur Larbin, le bot du channel! Je suis là pour vous faire passer un bon moment sur le serveur.\n Voici une liste de ce que je sais faire (pour l'instant) :\n
 * !play [soundname] -> Joue le son 'soundname' de la bibliothèque. Passe --help en argument pour connaitre le contenu de la bibliothèque\n
+* !playlist [playlistname] [songName ...] -> Créer une playlist dans youtube et la joue, les différents sons doivent être séparés par '/'. Passe --help en argument pour connaitre les commandes\n
 * !yt -> Joue une vidéo youtube dans un cannal vocal\n
 * !stop -> Retire le bot du channel vocal où il se trouve actuellement\n
 * !rand [element ...] -> Tire au sort un élément parmis ceux précisés en argument\n

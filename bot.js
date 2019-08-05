@@ -25,9 +25,28 @@ bot.on('message', message => {
       message.reply("Fais ta demande dans le cannal 'bot_commands', s'il te plait");
       return;
     }
-    const args = message.content.slice(config.startCommand.length).split(/ +/);
-    const commandName = args.shift().toLowerCase();
-  
+    let commandName;
+    let args;
+    if (!message.content.includes(`${config.startCommand}playlist`)) {
+      args = message.content.slice(config.startCommand.length).split(/ +/);
+      commandName = args.shift().toLowerCase();
+    }
+    else { //for the playlist command, we want to keep white char of music name. So we split on / char
+      commandName = message.content.substr(config.startCommand.length, (message.content.indexOf(" ") - 1));      
+      if (message.content.includes("--name=") && message.content.includes("--songs=")) {
+          let playlistname = message.content.match(/--name=(.*) --songs=/g)[0];          
+          playlistname = playlistname.replace(/--name=/g, "").replace(/ --songs=/g, "");
+          let songList = message.content.match(/--songs=.*/g)[0].replace(/--songs=/g, "");
+          args = songList.match(/[^\/]+/g);
+          args ? args.unshift(playlistname) : playlistname;
+      }
+      else {
+          message.reply("La commande playlist s'utilise de cette manière : \n !playlist --name=<playlistname> --songs=song1/song2/song3'");
+          return;
+      }
+    }
+
+    
     if (!bot.commands.has(commandName)) return;
   
     const command = bot.commands.get(commandName);
